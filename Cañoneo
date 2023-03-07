@@ -1,0 +1,37 @@
+# Ingreso de librerías a utilizar
+ 
+from numpy import * 
+import pandas as pd
+
+
+# Ingreso de los datos
+
+Lcas = float(input("Introduzca la longitud del casing en ft: "))
+Dcas = float(input("Introduzca el diámetro del casing en in: "))
+Lslin = float(input("Introduzca la profundidad de la parte alta del liner en ft: "))
+Lilin = float(input("Introduzca la profundidad de la parte baja del liner en ft: "))
+Dlin = float(input("Introduzca el diámetro del liner en in: "))
+Pr = float(input("Introduzca La Presión de Reservorio en Psi: "))
+UB = float(input("Intruduzca el UnderBalance en Psi: "))
+Q = float(input("Introduzca el Caudal de la Bomba en Bls/D: "))
+NC = float(input("Introduzca la altura a la que se cañonea en ft: "))
+
+# Cálculos
+1
+Ph=Pr-UB
+h=Ph/(0.052*8.33)
+
+NE=NC-h
+if NE<Lslin:
+    v=pi*NE*((Dcas/24)**2-0.021267)
+    v=v/5.615
+    t=v*1440/Q
+    print("Toma ",t," minutos para sacar ",v," barriles de volumen de la tubería")
+else:
+    vc=(pi*Lslin*(Dcas/24)**2)
+    vl=pi*(NE-Lslin)*((Dlin/24)**2)
+    vp=pi*NE*(0.021267)
+    v=vc+vl-vp
+    v=v/5.615
+    t=v*1440/Q
+    print("Toma ",t," minutos para sacar ",v," barriles de volumen de la tubería")
